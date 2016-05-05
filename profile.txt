@@ -1,0 +1,38 @@
+
+D:\Sim\MSimv3.0\MRT>python -m cProfile D:\Sim\MSimv3.0\MRT\main.py 
+ #################################################################################################
+			                MARKET RESEARCH TOOL 
+			                       v3.0 
+ #################################################################################################
+
+			                <<< Main Menu >>> 
+
+ [1] Load Data/Update  [2] General Calculations   [3] Fund Analysis 
+ [4] Research Stock 
+ [7] Help              [8] Exit 
+
+<<< Select: <<<(w) Invalid Entry
+ #################################################################################################
+			                MARKET RESEARCH TOOL 
+			                       v3.0 
+ #################################################################################################
+
+			                <<< Main Menu >>> 
+
+ [1] Load Data/Update  [2] General Calculations   [3] Fund Analysis 
+ [4] Research Stock 
+ [7] Help              [8] Exit 
+
+<<< Select: <<<(w) Invalid Entry
+ #################################################################################################
+			                MARKET RESEARCH TOOL 
+			                       v3.0 
+ #################################################################################################
+
+			                <<< Main Menu >>> 
+
+ [1] Load Data/Update  [2] General Calculations   [3] Fund Analysis 
+ [4] Research Stock 
+ [7] Help              [8] Exit 
+
+<<< Select: <<<(w) Invalid Entry
