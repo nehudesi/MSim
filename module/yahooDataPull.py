@@ -47,7 +47,8 @@ def get_data(data_path, ls_symbols):
             
             symbol_data.pop(-1) #The last element is going to be the string of length zero. We don't want to write that to file.
             #now writing data to file
-            os.chdir('C:\MRT3.0\Data\Yahoo')
+            curr_path = os.getcwd()
+            os.chdir(curr_path)
             f = open (symbol_name + ".csv", 'w')
             
             #Writing the header
@@ -81,10 +82,11 @@ def read_symbols(s_symbols_file):
     return ls_symbols  
 
 def yahooDatamain():
-    path = 'C:\MRT3.0\Data\Yahoo'
-   
-    if os.path.isfile("C:\MRT3.0\MRT_SYMBOLS.txt"):
-        ls_symbols = read_symbols('MRT_SYMBOLS.txt')
+    path = os.getcwd()
+    print path
+    symbol_file = os.path.join(path,"MRT_SYMBOLS.txt")
+    if os.path.isfile(symbol_file):
+        ls_symbols = read_symbols(symbol_file)
         get_data(path, ls_symbols)
     else:
         print '<<<(w) File Not Found: MRT_SYMBOLS.txt '

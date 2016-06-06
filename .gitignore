@@ -3,6 +3,9 @@
 # C extensions
 *.so
 
+# Python files
+*.pyc
+
 # Packages
 *.egg
 *.egg-info

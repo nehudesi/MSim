@@ -28,7 +28,7 @@ def _cache_dates():
     dates = []
     for i in datestxt:
         dates.append(dt.datetime.strptime(i, "%m/%d/%Y"))
-    return pd.TimeSeries(index=dates, data=dates)
+    return pd.Series(index=dates, data=dates)
 
 GTS_DATES = _cache_dates()
 
