@@ -15,7 +15,7 @@ import os
 import basic
 import time
 
-def get_data(data_path, ls_symbols):
+def get_data(data_path,ls_symbols):
 
     # Create path if it doesn't exist
     if not (os.access(data_path, os.F_OK)):
@@ -47,8 +47,7 @@ def get_data(data_path, ls_symbols):
             
             symbol_data.pop(-1) #The last element is going to be the string of length zero. We don't want to write that to file.
             #now writing data to file
-            curr_path = os.getcwd()
-            os.chdir(curr_path)
+            os.chdir(data_path)
             f = open (symbol_name + ".csv", 'w')
             
             #Writing the header
@@ -87,7 +86,8 @@ def yahooDatamain():
     symbol_file = os.path.join(path,"MRT_SYMBOLS.txt")
     if os.path.isfile(symbol_file):
         ls_symbols = read_symbols(symbol_file)
-        get_data(path, ls_symbols)
+        download_path = os.path.join(path,'Data\Yahoo')
+        get_data(download_path, ls_symbols)
     else:
         print '<<<(w) File Not Found: MRT_SYMBOLS.txt '
         time.sleep(2)

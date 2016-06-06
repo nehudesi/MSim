@@ -7,7 +7,7 @@ Location: C:\MRT3.0
 
 """
 
-#import os
+import os
 #import time
 from module.basic import *
 
@@ -29,7 +29,14 @@ def print_logo():
     print '\t\t\t                       v3.0 '
     print ' #################################################################################################\n'
 
-            
+
+def print_symbol_file():
+    symbol_file = os.path.join(os.getcwd(),'MRT_SYMBOLS.txt')
+    f = open(symbol_file,'r')
+    contents = f.read()
+    print "### Current symbols files has below symbols..###"
+    print (contents)
+
 def main():
     cont = 1
     while cont != 0:
@@ -58,6 +65,7 @@ def main():
                 print_logo()
                 print '\t\t\t             <<< Load Data/Update >>> \n '
                 print "<<<(i) Update MRT_SYMBOLS.txt file with specific symbols list in it "
+                print_symbol_file()
                 s = str(raw_input("<<<(i) Press Y if created or else N: "))
                 if s == 'Y' or s == 'y':
                     yahooDatamain()
