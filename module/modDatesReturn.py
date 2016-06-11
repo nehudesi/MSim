@@ -7,7 +7,7 @@ Email: chintanlike@gmail.com
 '''
 
 import basic
-
+import datetime
 
 def get_dates():
         print '------------------------------------------------------------- '
@@ -24,7 +24,8 @@ def get_dates():
                         basic.go_back()
 
                 start_year = int(input('<<< Enter Start Year: '))
-                if int(start_year) > 2015 or int(start_year) < 2010:
+                now = datetime.datetime.now()
+                if int(start_year) > now.year or int(start_year) < 2010:
                         basic.print_clrscr()
                         basic.go_back()
     
@@ -39,7 +40,7 @@ def get_dates():
                         basic.go_back()
                         
                 end_year = input('<<< Enter End Year: ')
-                if int(end_year) > 2015 or int(end_year) < 2010:
+                if int(end_year) > now.year or int(end_year) < 2010:
                         basic.print_clrscr()
                         basic.go_back()
                         

@@ -57,8 +57,10 @@ class DataAccess(object):
     and returns that object. The {main} function currently demonstrates use.
     @note: The earliest time for which this works is platform dependent because the python date functionality is platform dependent.
     '''
-    def __init__(self, sourcein=DataSource.YAHOO, s_datapath='C:\MRT3.0\Data',
-                 s_scratchpath='C:\MRT3.0\Data', cachestalltime=12, verbose=False):
+    data_path = os.path.join(os.getcwd(), 'Data')
+
+    def __init__(self, sourcein=DataSource.YAHOO, s_datapath=data_path,
+                 s_scratchpath=data_path, cachestalltime=12, verbose=False):
         '''
         @param sourcestr: Specifies the source of the data. Initializes paths based on source.
         @note: No data is actually read in the constructor. Only paths for the source are initialized
