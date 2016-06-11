@@ -23,11 +23,11 @@ from module.fundAnalysis import fundanalysisMain
 
 def print_logo():
     os.system("CLS")
-    print ' #################################################################################################'
-    print '\t\t\t                MARKET RESEARCH TOOL '
-    print '\t\t\t                       BASIC '
-    print '\t\t\t                       v3.0 '
-    print ' #################################################################################################\n'
+    print '###############################################################################'
+    print '\t\t                MARKET RESEARCH TOOL '
+    print '\t\t                       BASIC '
+    print '\t\t                       v3.0 '
+    print '###############################################################################\n'
 
 
 def print_symbol_file():
