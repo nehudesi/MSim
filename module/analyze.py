@@ -81,30 +81,30 @@ def analyzeMain():
 
 
     bench_vals = _read_bench(benchmark, list(ts_fund.index))
-    # print bench_vals
+    # print(bench_vals))
     multiple = ts_fund[0] / bench_vals[0]
     bench_vals = bench_vals * multiple
     
-    print "Details of the Performance of the portfolio"
-    print "Total Fund:", ts_fund[0]
-    print 'Data Range : ', ts_fund.index[0], ' to ', ts_fund.index[-1]
-    print 'Sharpe Ratio of Fund :', tsu.get_sharpe_ratio(tsu.daily(ts_fund))[0]
-    print 'Sharpe Ratio of ' + benchmark + ' :', tsu.get_sharpe_ratio(
+    print("Details of the Performance of the portfolio"
+    print("Total Fund:", ts_fund[0]
+    print('Data Range : ', ts_fund.index[0], ' to ', ts_fund.index[-1]
+    print('Sharpe Ratio of Fund :', tsu.get_sharpe_ratio(tsu.daily(ts_fund)[0]
+    print('Sharpe Ratio of ' + benchmark + ' :', tsu.get_sharpe_ratio(
                                               tsu.daily(bench_vals))[0]
-    print 'Total Return of Fund : ', (((ts_fund[-1] / ts_fund[0]) - 1) + 1)
-    print 'Total Return of ' + benchmark + ' :', (((bench_vals[-1]
+    print('Total Return of Fund : ', (((ts_fund[-1] / ts_fund[0]) - 1) + 1)
+    print('Total Return of ' + benchmark + ' :', (((bench_vals[-1]
                                                 / bench_vals[0]) - 1) + 1)
-    print 'Standard Deviation of Fund : ', np.std(tsu.daily(
+    print('Standard Deviation of Fund : ', np.std(tsu.daily(
                                            ts_fund.values))
-    print 'Standard Deviation of ' + benchmark + ' :', np.std(
+    print('Standard Deviation of ' + benchmark + ' :', np.std(
                                            tsu.daily(bench_vals.values))
 
-    print 'Average Daily Return of Fund : ', np.mean(tsu.daily(
+    print('Average Daily Return of Fund : ', np.mean(tsu.daily(
                                            ts_fund.values))
-    print 'Average Daily Return of ' + benchmark + ' :', np.mean(
+    print('Average Daily Return of ' + benchmark + ' :', np.mean(
                                            tsu.daily(bench_vals.values))
     KS, P = ks_statistic(ts_fund)    
-    print "KS P:" , KS,P    
+    print("KS P:" , KS,P    
     plt.clf()
     plt.plot(ts_fund.index, ts_fund.values)
     plt.plot(ts_fund.index, bench_vals)
@@ -140,7 +140,7 @@ def analyzeMain():
         file_conv1 = file_conv.replace(":","_")
         file_conv2 = file_conv1.replace("-","_")
         filename = file_conv2+".html"
-        print 'Generating report..', filename
+        print('Generating report..', filename
         html_file  =  open(filename,"w+")
         html_file.write("<HTML>\n")
         html_file.write("<HEAD>\n")

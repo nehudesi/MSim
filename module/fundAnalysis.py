@@ -7,12 +7,12 @@ Email: chintanlike@gmail.com
 
 '''
 
-import basic
+from module import basic
 
-from eventmod import eventmenuMain
-from marketsim import marketsimMain
+from module.eventmod import eventmenuMain
+from module.marketsim import marketsimMain
 #from analyze import *
-from portAnalyzer import portfolioAnalyz
+from module.portAnalyzer import portfolioAnalyz
 
 
 
@@ -20,17 +20,13 @@ from portAnalyzer import portfolioAnalyz
 
 def fundanalysisMain():
 
-    print '\t\t\t                <<< Fund Analysis >>> \n'
-    print '\t [1] Analyze Portfolio Allocation  [2] Event Analyzer    [3] Analyze Portfolio'  
-    print '\t [7] Main Menu '
+    print('\t\t\t                <<< Fund Analysis >>> \n')
+    print('\t [1] Analyze Portfolio Allocation  [2] Event Analyzer    [3] Analyze Portfolio')  
+    print('\t [7] Main Menu ')
     
     try:
-        sel_opt = input('\n<<< Select: ')
-    except SyntaxError:
-        basic.print_clrscr()
-        basic.print_logo()
-        fundanalysisMain()
-    except NameError:
+        sel_opt = int(input('\n<<< Select: '))
+    except (SyntaxError, NameError, ValueError):
         basic.print_clrscr()
         basic.print_logo()
         fundanalysisMain()
@@ -43,7 +39,7 @@ def fundanalysisMain():
         eventmenuMain()
     elif sel_opt  == 3:
         basic.print_logo()
-        print '<<<(s) Update orders.csv file.. \n'
+        print('<<<(s) Update orders.csv file.. \n')
         marketsimMain()
     elif sel_opt == 7:
         basic.go_back()

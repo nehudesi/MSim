@@ -19,8 +19,8 @@ import datetime as dt
 import matplotlib.pyplot as plt
 #import pandas as pd
 import numpy as np
-import basic
-import modDatesReturn
+from module import basic
+from module import modDatesReturn
 
 
 def simulate(na_rets, lf_alloc):
@@ -46,9 +46,9 @@ def bestPort():
     ls_symbols = list()
     
     try:
-        len_sym = input('<<< How many symbol(Works only for 4 symbols):  ')
+        len_sym = int(input('<<< How many symbol(Works only for 4 symbols):  '))
         if len_sym > 4 or len_sym <= 0 or len_sym < 4:
-            print '<<<(w) Works only for 4 symbols..\n'
+            print('<<<(w) Works only for 4 symbols..\n')
             basic.print_logo()
             basic.print_clrscr()
             basic.go_back()        
@@ -69,7 +69,7 @@ def bestPort():
 
     
     for i in range(len_sym):
-        symbols = str(raw_input('<<< Enter the list of symbols: '))
+        symbols = str(input('<<< Enter the list of symbols: '))
         ls_symbols.append(symbols)
 
     ## Start and End date of the charts
@@ -132,12 +132,12 @@ def bestPort():
                     final_daily_ret = daily_ret
                     best_portfolio = lf_alloc
 
-    print "<<< Symbols : ", ls_symbols
-    print "<<< Best Portfolio : ", best_portfolio
-    print "<<< Statistics : Std. Deviation : ", final_stddev
-    print "<<< Statistics : Daily Returns  : ", final_daily_ret
-    print "<<< Statistics : Cum. Returns   : ", final_cum_ret
-    print "<<< Statistics : Sharpe Ratio   : ", max_sharpe
+    print("<<< Symbols : ", ls_symbols)
+    print("<<< Best Portfolio : ", best_portfolio)
+    print("<<< Statistics : Std. Deviation : ", final_stddev)
+    print("<<< Statistics : Daily Returns  : ", final_daily_ret)
+    print("<<< Statistics : Cum. Returns   : ", final_cum_ret)
+    print("<<< Statistics : Sharpe Ratio   : ", max_sharpe)
 ##
 ##    ls_symbols_toread = list(set(ls_symbols) | set(['SPY']))
 ##

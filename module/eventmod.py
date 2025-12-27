@@ -17,9 +17,9 @@ import numpy as np
 #import math
 import copy
 import csv
-import basic
-import modDatesReturn
-import eventBollinger
+from module import basic
+from module import modDatesReturn
+from module import eventBollinger
 import datetime as dt
 
 def find_events(ls_symbols, d_data):
@@ -27,7 +27,7 @@ def find_events(ls_symbols, d_data):
     df_close = d_data['actual_close']
     ts_market = df_close['SPY']
 
-    print "Finding Events"
+    print("Finding Events")
 
     # Creating an empty dataframe
     df_events = copy.deepcopy(df_close)
@@ -36,12 +36,12 @@ def find_events(ls_symbols, d_data):
     ldt_timestamps = df_close.index
     writer = csv.writer(open('orders.csv', 'wb'), delimiter=',')
     
-    f_symreturn_cutoff = input('<<< Enter the cutoff in decimel for symbol return today: ')
-    f_marketreturn_cutoff = input('<<< Enter the cutoiff in decimel for market return today: ')
-    print '1 -> SYMBOL_RETURN_TODAY > ', f_symreturn_cutoff,  '& MARKET_RETURN_TODAY  < ', f_marketreturn_cutoff
-    print '2 -> SYMBOL_RETURN_TODAY < ', f_symreturn_cutoff,  '& MARKET_RETURN_TODAY  > ', f_marketreturn_cutoff
-    print '3 -> SYMBOL_RETURN_TODAY > ', f_symreturn_cutoff,  '& MARKET_RETURN_TODAY  > ', f_marketreturn_cutoff
-    print '4 -> SYMBOL_RETURN_TODAY <', f_symreturn_cutoff,  '& MARKET_RETURN_TODAY  < ', f_marketreturn_cutoff
+    f_symreturn_cutoff = float(input('<<< Enter the cutoff in decimel for symbol return today: '))
+    f_marketreturn_cutoff = float(input('<<< Enter the cutoiff in decimel for market return today: '))
+    print('1 -> SYMBOL_RETURN_TODAY > ', f_symreturn_cutoff, ' & MARKET_RETURN_TODAY  < ', f_marketreturn_cutoff)
+    print('2 -> SYMBOL_RETURN_TODAY < ', f_symreturn_cutoff, ' & MARKET_RETURN_TODAY  > ', f_marketreturn_cutoff)
+    print('3 -> SYMBOL_RETURN_TODAY > ', f_symreturn_cutoff, ' & MARKET_RETURN_TODAY  > ', f_marketreturn_cutoff)
+    print('4 -> SYMBOL_RETURN_TODAY <', f_symreturn_cutoff, ' & MARKET_RETURN_TODAY  < ', f_marketreturn_cutoff)
     
     try:
         select = input('Select: ')
@@ -149,23 +149,23 @@ def eventmodMain():
         d_data[s_key] = d_data[s_key].fillna(1.0)
 
     df_events = find_events(ls_symbols, d_data)
-    print "Creating Study"
+    print("Creating Study")
     ret = ep.eventprofiler(df_events, d_data, i_lookback=20, i_lookforward=20,
                 s_filename='MyEventStudy.pdf', b_market_neutral=True, b_errorbars=True,
                 s_market_sym='SPY')
     
     if ret == 0:
-        print 'No events'
+        print('No events')
         basic.print_clrscr()
         basic.print_logo()
         eventmenuMain()
         
 def eventmenuMain():
     
-    print '\t\t\t             <<< Event Analyzer >>> \n '
-    print ' [1] Event based on Market           [2] Event based on Bollinger'
-    print ' [7] Main Menu '
- 
+    print('\t\t\t             <<< Event Analyzer >>> \n ')
+    print(' [1] Event based on Market           [2] Event based on Bollinger')
+    print(' [7] Main Menu ')
+
     try:
         sel_opt = input('\n<<< Select: ')
     except SyntaxError:

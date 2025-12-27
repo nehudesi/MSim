@@ -8,11 +8,15 @@ Email: chintanlike@gmail.com
 Pulling Yahoo CSV Data
 '''
 
-import urllib2
-import urllib
+try:
+    import urllib.request as urllib2
+    import urllib.parse as urllib
+except Exception:
+    import urllib2
+    import urllib
 import datetime
 import os
-import basic
+from module import basic
 import time
 
 def get_data(data_path,ls_symbols):
@@ -33,7 +37,7 @@ def get_data(data_path,ls_symbols):
             symbol = '^' + symbol[1:]
 
         symbol_data=list()
-        # print "Getting {0}".format(symbol)
+        # print("Getting {0}".format(symbol)
         
         try:
             params= urllib.urlencode ({'a':0, 'b':1, 'c':2010, 'd':_now.month, 'e':_now.day, 'f':_now.year, 's': symbol})
@@ -61,12 +65,12 @@ def get_data(data_path,ls_symbols):
         
         except urllib2.HTTPError:
             miss_ctr += 1
-            print "<<<(w) Unable to fetch data for stock: {0}".format(symbol_name)
+            print("<<<(w) Unable to fetch data for stock: {0}".format(symbol_name))
         except urllib2.URLError:
             miss_ctr += 1
-            print "<<<(w) URL Error for stock: {0}".format(symbol_name)
+            print("<<<(w) URL Error for stock: {0}".format(symbol_name))
             
-    print "All done. Got {0} stocks. Could not get {1}".format(len(ls_symbols) - miss_ctr, miss_ctr)
+    print("All done. Got {0} stocks. Could not get {1}".format(len(ls_symbols) - miss_ctr, miss_ctr))
 
 def read_symbols(s_symbols_file):
 
@@ -82,14 +86,14 @@ def read_symbols(s_symbols_file):
 
 def yahooDatamain():
     path = os.getcwd()
-    print path
+    print(path)
     symbol_file = os.path.join(path,"MRT_SYMBOLS.txt")
     if os.path.isfile(symbol_file):
         ls_symbols = read_symbols(symbol_file)
-        download_path = os.path.join(path,'Data\Yahoo')
+        download_path = os.path.join(path,'Data','Yahoo')
         get_data(download_path, ls_symbols)
     else:
-        print '<<<(w) File Not Found: MRT_SYMBOLS.txt '
+        print('<<<(w) File Not Found: MRT_SYMBOLS.txt ')
         time.sleep(2)
         basic.go_back()
    

@@ -7,9 +7,9 @@ Email: chintanlike@gmail.com
     
 """
 
-import bollingerPlot
-from generalCalc import *
-#import basic
+from module import bollingerPlot
+from module.generalCalc import *
+from module import basic
 
 
 
@@ -20,8 +20,8 @@ def scatterplot():
     #sym = list()        
     sym = objcalc.ls_symbols
     if len(sym) > 2:
-        print '<<<(w) Invalid Number..\n'
-        print '<<<(i) Please enter 2 symbols only..\n'
+        print('<<<(w) Invalid Number..\n')
+        print('<<<(i) Please enter 2 symbols only..\n')
         basic.print_clrscr()
         basic.print_logo()        
         researchstockMain()
@@ -37,21 +37,13 @@ def scatterplot():
     plt.show()
 
 def researchstockMain():
-    print '\t\t\t                <<< Research Stock >>> \n '
-    print '\t [1] Bollinger Plot   [2] Calculate Book Value   [3] Scattered Plot  '
-    print '\t [7] Main Menu'  
+    print('\t\t\t                <<< Research Stock >>> \n ')
+    print('\t [1] Bollinger Plot   [2] Calculate Book Value   [3] Scattered Plot  ')
+    print('\t [7] Main Menu')  
     
     try:
-        sel_opt = input('\n<<< Select: ')
-    except SyntaxError:
-        basic.print_clrscr()
-        basic.print_logo()
-        researchstockMain()
-    except NameError:
-        basic.print_clrscr()
-        basic.print_logo()
-        researchstockMain()
-    except ValueError:
+        sel_opt = int(input('\n<<< Select: '))
+    except (SyntaxError, NameError, ValueError):
         basic.print_clrscr()
         basic.print_logo()
         researchstockMain()
@@ -59,7 +51,7 @@ def researchstockMain():
     if sel_opt == 1:
         bollingerPlot.bollingerplotMain()
     elif sel_opt == 3:
-        print '<<<(i) Please enter 2 symbols only..\n'
+        print('<<<(i) Please enter 2 symbols only..\n')
         scatterplot()       
     elif sel_opt == 7:
         basic.go_back()     

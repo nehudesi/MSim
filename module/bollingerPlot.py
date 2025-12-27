@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 #import numpy as np
 #import basic
-import modDatesReturn
+from module import modDatesReturn
 
 def bollingerplotMain():
     '''Main Function'''
@@ -26,7 +26,7 @@ def bollingerplotMain():
     #ls_symbols = ["AAPL", "GOOG", "IBM", "MSFT"]
     ls_symbols = list()
 
-    symbol = str(raw_input('<<< Enter the list of symbol: '))
+    symbol = str(input('<<< Enter the list of symbol: '))
     symbols = symbol.upper()    
     ls_symbols.append(symbols)
             
@@ -56,7 +56,7 @@ def bollingerplotMain():
     df_std = pd.rolling_std(d_data['close'], 20)
 
     df_bollinger = (df_close - df_mean) / (df_std)
-    print df_bollinger.tail()
+    print(df_bollinger.tail())
     # Plotting the prices with x-axis=timestamps
     plt.clf()
     plt.subplot(211)

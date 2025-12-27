@@ -14,8 +14,8 @@ from pylab import *
 #import sys
 import pandas
 import csv
-import analyze
-import basic
+# import analyze
+from module import basic
 
 def _csv_read_sym_dates(filename):
     reader = csv.reader(open(filename, 'rU'), delimiter=',')
@@ -107,4 +107,4 @@ def marketsimMain():
     share_matrix = _share_value_cash(share_matrix, close, i_start_cash)
     ts_fund = _fund_value(share_matrix, close)  
     _write_fund(ts_fund, 'values.csv')
-    analyze.analyzeMain()
+    # analyze.analyzeMain()

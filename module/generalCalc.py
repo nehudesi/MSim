@@ -5,7 +5,7 @@ Location: C:\MRT3.0\module
 Author: Chintan Patel
 Email: chintanlike@gmail.com
 
-This module print daily return, sharpe ratios, stddev, and graphs
+This module print(daily return, sharpe ratios, stddev, and graphs))
 Select appropriate choice
 """
 
@@ -19,10 +19,10 @@ import datetime as dt
 import matplotlib.pyplot as plt
 #import pandas as pd
 import numpy as np
-import basic
-import bestPortfolio
+from module import basic
+from module import bestPortfolio
 import csv
-import modDatesReturn
+from module import modDatesReturn
 
 class GeneralCalc(object):
     def __init__(self):
@@ -35,7 +35,7 @@ class GeneralCalc(object):
         len_sym = basic.get_num_sym()
             
         for i in range(len_sym):
-            symbols = str(raw_input('<<< Enter symbols:' ))
+            symbols = str(input('<<< Enter symbols:' ))
             self.ls_symbols.append(symbols)
                 
              
@@ -88,16 +88,16 @@ class GeneralCalc(object):
         # returnize0 works on ndarray and not dataframes.
         tsu.returnize0(na_rets)
         
-        log = input('<<< 1. Dump data in to file .. \n<<< 2. Print on console\n<<< 0. Press 0 to ignore: ')
+        log = int(input('<<< 1. Dump data in to file .. \n<<< 2. Print on console\n<<< 0. Press 0 to ignore: '))
 
         #open log file
         if log == 1:
-            writer =  csv.writer(open('daliy_returns.csv','wb'),delimiter=',')
+            writer =  csv.writer(open('daliy_returns.csv','w'),delimiter=',')
             
             writer.writerow(self.ls_symbols)
             
             row = list()
-            writer =  csv.writer(open('daliy_returns.csv','ab'),delimiter='\n')
+            writer =  csv.writer(open('daliy_returns.csv','a'),delimiter='\n')
             for i in range(len(self.ldt_timestamps)):
                     row.append(str(self.ldt_timestamps[i]) + str(na_rets[i] * 100))
             
@@ -113,15 +113,15 @@ class GeneralCalc(object):
 
         #write column headings
         
-        print '\n'
+        print()
         if log == 2:
-            print ' Date ', '\t\t' ,  
+            print(' Date ', '\t\t')
 
             for i in range(len(self.ls_symbols)):
-                print '\t\t', self.ls_symbols[i],            
+                print('\t\t', self.ls_symbols[i])
 
             for i in range(len(self.ldt_timestamps)):
-                print self.ldt_timestamps[i],'\t', na_rets[i] * 100,'\n'
+                print(self.ldt_timestamps[i],'\t', na_rets[i] * 100,'\n')
          
         if log == 0:
             return na_rets
@@ -140,39 +140,35 @@ class GeneralCalc(object):
     def calStdDev(self,ret_daily):
         
         std_dev = np.std(ret_daily)
-        print '<<< Standard Deviation:',std_dev*100,'%'
+        print('<<< Standard Deviation:',std_dev*100,'%')
         
     def getPortfolioOpt(self, rets):
         basic.print_clrscr()
         basic.print_logo()        
         #l_period = input('<<< Enter period to compress return i.e 7 = Weekly : ')
-        f_target = input('<<< Target Return: ')
+        f_target = float(input('<<< Target Return: '))
         na_lower = np.zeros(rets.shape[1])
         na_upper = np.ones(rets.shape[1])
         
         weight_port,min_ret, max_ret = tsu.OptPort(rets, f_target, na_lower, na_upper,s_type="long")
-        print "<<< Weight of Portfolio:", weight_port
-        print "<<< Error:", max_ret
-        print "<<< Minimum Return:", min_ret
+        print("<<< Weight of Portfolio:", weight_port)
+        print("<<< Error:", max_ret)
+        print("<<< Minimum Return:", min_ret)
 
     def getSharpeRatio(self, rets):
         sharpe_ratio = tsu.get_sharpe_ratio(rets)
-        print '<<< Sharpe Ration:', sharpe_ratio
+        print('<<< Sharpe Ration:', sharpe_ratio)
 
         
 def generalcalc():
-    print '\t\t\t                <<< General Calculations >>> \n '
-    print ' [1] Plot Adjusted Close      [2] Calculate Daily Return  [3] Calculate Standard Devation'
-    print ' [4] Optimized Portfolio      [5] Get Sharpe Ration       [6] Best Portfolio'
-    print ' [7] Main Menu '
+    print('\t\t\t                <<< General Calculations >>> \n ')
+    print(' [1] Plot Adjusted Close      [2] Calculate Daily Return  [3] Calculate Standard Devation')
+    print(' [4] Optimized Portfolio      [5] Get Sharpe Ration       [6] Best Portfolio')
+    print(' [7] Main Menu ')
 
     try:
-        sel_opt = input('\n<<< Select: ')
-    except SyntaxError:
-        basic.print_clrscr()
-        basic.print_logo()
-        generalcalc()
-    except NameError:
+        sel_opt = int(input('\n<<< Select: '))
+    except (SyntaxError, NameError, ValueError):
         basic.print_clrscr()
         basic.print_logo()
         generalcalc()

@@ -15,7 +15,6 @@ import csv
 import pickle as pkl
 import time
 import datetime as dt
-import dircache
 import tempfile
 import copy
 
@@ -90,11 +89,11 @@ class DataAccess(object):
                 self.scratchdir = os.path.join(tempfile.gettempdir(), 'QSScratch')
 
         if verbose:
-            print "Scratch Directory: ", self.scratchdir
-            print "Data Directory: ", self.rootdir
+            print("Scratch Directory: ", self.scratchdir)
+            print("Data Directory: ", self.rootdir)
 
         if not os.path.isdir(self.rootdir):
-            print "Data path provided is invalid"
+            print("Data path provided is invalid")
             raise
 
         if not os.path.exists(self.scratchdir):
@@ -231,7 +230,7 @@ class DataAccess(object):
         for symbol in symbol_list:
             _file = None
             symbol_ctr = symbol_ctr + 1
-            #print self.getPathOfFile(symbol)
+            #print(self.getPathOfFile(symbol)))
             try:
                 if (self.source == DataSource.CUSTOM) or (self.source == DataSource.MLT)or (self.source == DataSource.YAHOO):
                     file_path= self.getPathOfCSVFile(symbol);
@@ -242,7 +241,7 @@ class DataAccess(object):
                 if bIncDelist:
                     lsDelPaths = self.getPathOfFile( symbol, True )
                     if file_path == None and len(lsDelPaths) > 0:
-                        print 'Found delisted paths:', lsDelPaths
+                        print('Found delisted paths:', lsDelPaths)
                 
                 ''' If we don't have a file path continue... unless we have delisted paths '''
                 if (type (file_path) != type ("random string")):
@@ -253,7 +252,7 @@ class DataAccess(object):
                     _file = open(file_path, "rb")
             except IOError:
                 # If unable to read then continue. The value for this stock will be nan
-                print _file
+                print(_file)
                 continue;
                 
             assert( not _file == None or bIncDelist == True )
@@ -312,14 +311,14 @@ class DataAccess(object):
                         
             #now remove all the columns except the timestamps and one data column
             if verbose:
-                print self.getPathOfFile(symbol)
+                print(self.getPathOfFile(symbol))
             
             ''' Fix 1 row case by reshaping '''
             if( naData.ndim == 1 ):
                 naData = naData.reshape(1,-1)
                 
-            #print naData
-            #print list_index
+            #print(naData))
+            #print(list_index))
             ''' We open the file once, for each data item we need, fill out the array in all_stocks_data '''
             for lLabelNum, lLabelIndex in enumerate(list_index):
                 
@@ -329,7 +328,7 @@ class DataAccess(object):
                 ''' select timestamps and the data column we want '''
                 temp_np = naData[:,(0,lLabelIndex)]
                 
-                #print temp_np
+                #print(temp_np))
                 
                 num_rows= temp_np.shape[0]
 
@@ -368,7 +367,7 @@ class DataAccess(object):
                 while (ts_ctr < temp_np.shape[0]) and (symbol_ts_list[ts_ctr] < ts_list[0]):
                     ts_ctr=  ts_ctr+1
                     
-                    #print "skipping initial data"
+                    #print("skipping initial data"
                     #while ends
                 
                 for time_stamp in ts_list:
@@ -383,11 +382,11 @@ class DataAccess(object):
                             #while ends
                         #else ends
                                             
-                    #print "at time_stamp: " + str(time_stamp) + " and symbol_ts "  + str(symbol_ts_list[ts_ctr])
+                    #print("at time_stamp: " + str(time_stamp) + " and symbol_ts "  + str(symbol_ts_list[ts_ctr])
                     
                     if (time_stamp == symbol_ts_list[ts_ctr]):
                         #Data is present for this timestamp. So add to numpy array.
-                        #print "    adding to numpy array"
+                        #print("    adding to numpy array"
                         if (temp_np.ndim > 1): #This if is needed because if a stock has data for 1 day only then the numpy array is 1-D rather than 2-D
                             all_stocks_data[lLabelNum][ts_list.index(time_stamp)][symbol_ctr] = temp_np [ts_ctr][1]
                         else:
@@ -398,7 +397,7 @@ class DataAccess(object):
                     
                 #inner for ends
             #outer for ends
-        #print all_stocks_data
+        #print(all_stocks_data))
         
         ldmReturn = [] # List of data matrixes to return
         for naDataLabel in all_stocks_data:
@@ -440,7 +439,7 @@ class DataAccess(object):
         # Create the hash for the timestamps
         hashts = 0
 
-        # print "test point 1: " + str(len(ts_list))
+        # print("test point 1: " + str(len(ts_list)
         # spyfile=os.environ['QSDATA'] + '/Processed/Norgate/Stocks/US/NYSE Arca/SPY.pkl'
         for i in ts_list:
             hashts = (hashts + hash(i)) % 10000000
@@ -457,7 +456,7 @@ class DataAccess(object):
         # final complete filename
         cachefilename = self.scratchdir + '/' + hashstr + '.pkl'
         if verbose:
-            print "cachefilename is: " + cachefilename
+            print("cachefilename is: " + cachefilename)
 
         # now eather read the pkl file, or do a hardread
         readfile = False  # indicate that we have not yet read the file
@@ -473,7 +472,7 @@ class DataAccess(object):
         if os.path.exists(cachefilename):
             if ((dt.datetime.now() - dt.datetime.fromtimestamp(os.path.getmtime(cachefilename))) < cachestall):
                 if verbose:
-                    print "cache hit"
+                    print("cache hit")
                 try:
                     cachefile = open(cachefilename, "rb")
                     start = time.time() # start timer
@@ -483,36 +482,36 @@ class DataAccess(object):
                     cachefile.close()
                 except IOError:
                     if verbose:
-                        print "error reading cache: " + cachefilename
-                        print "recovering..."
+                        print("error reading cache: " + cachefilename)
+                        print("recovering...")
                 except EOFError:
                     if verbose:
-                        print "error reading cache: " + cachefilename
-                        print "recovering..."
+                        print("error reading cache: " + cachefilename)
+                        print("recovering...")
         if (readfile!=True):
             if verbose:
-                print "cache miss"
-                print "beginning hardread"
+                print("cache miss")
+                print("beginning hardread")
             start = time.time() # start timer
             if verbose:
-                print "data_item(s): " + str(data_item)
-                print "symbols to read: " + str(symbol_list)
+                print("data_item(s): " + str(data_item))
+                print("symbols to read: " + str(symbol_list))
             retval = self.get_data_hardread(ts_list, 
                 symbol_list, data_item, verbose, bIncDelist)
             elapsed = time.time() - start # end timer
             if verbose:
-                print "end hardread"
-                print "saving to cache"
+                print("end hardread")
+                print("saving to cache")
             try:
                 cachefile = open(cachefilename,"wb")
                 pkl.dump(retval, cachefile, -1)
-                os.chmod(cachefilename,0666)
+                os.chmod(cachefilename,666)
             except IOError:
-                print "error writing cache: " + cachefilename
+                print("(error writing cache: " + cachefilename)
             if verbose:
-                print "end saving to cache"
+                print("end saving to cache")
             if verbose:
-                print "reading took " + str(elapsed) + " seconds"
+                print("reading took " + str(elapsed) + " seconds")
 
         if type(retval) == type([]):
             for i, df_single in enumerate(retval):
@@ -545,14 +544,14 @@ class DataAccess(object):
                 if re.search('Delisted Securities', sPath) == None:
                     continue
 
-                for sFile in dircache.listdir(sPath):
+                for sFile in os.listdir(sPath):
                     if not re.match( '%s-\d*.pkl'%symbol_name, sFile ) == None:
                         lsPaths.append(sPath + sFile)
 
             lsPaths.sort()
             return lsPaths
 
-        print "Did not find path to " + str(symbol_name) + ". Looks like this file is missing"
+        print("Did not find path to " + str(symbol_name) + ". Looks like this file is missing")
 
     def getPathOfCSVFile(self, symbol_name):
  
@@ -562,7 +561,7 @@ class DataAccess(object):
                     return (str(str(path1)+str(symbol_name)+".csv"))
                     #if ends
                 #for ends
-        print "Did not find path to " + str (symbol_name)+". Looks like this file is missing"    
+        print("Did not find path to " + str(symbol_name) + ". Looks like this file is missing")
 
     def get_all_symbols (self):
         '''
@@ -578,8 +577,8 @@ class DataAccess(object):
 
         for path in self.folderList:
             stocksAtThisPath = list()
-            #print str(path)
-            stocksAtThisPath = dircache.listdir(str(path))
+            #print(str(path)))
+            stocksAtThisPath = os.listdir(str(path))
             #Next, throw away everything that is not a .pkl And these are our stocks!
             stocksAtThisPath = filter (lambda x:(str(x).find(str(self.fileExtensionToRemove)) > -1), stocksAtThisPath)
             #Now, we remove the .pkl to get the name of the stock
@@ -638,7 +637,7 @@ class DataAccess(object):
         '''
  
         pathtolook = self.rootdir + self.midPath + subdir
-        stocksAtThisPath = dircache.listdir(pathtolook)
+        stocksAtThisPath = os.listdir(pathtolook)
  
         #Next, throw away everything that is not a .pkl And these are our stocks!
         try:
@@ -646,7 +645,7 @@ class DataAccess(object):
             #Now, we remove the .pkl to get the name of the stock
             stocksAtThisPath = map(lambda x:(x.partition(str(self.fileExtensionToRemove))[0]),stocksAtThisPath)
         except:
-            print "error: no path to " + subdir
+            print("error: no path to " + subdir)
             stocksAtThisPath = list()
  
         return stocksAtThisPath
@@ -668,7 +667,7 @@ class DataAccess(object):
         '''
  
         if (self.source != DataSource.COMPUSTAT):
-            print 'Function only valid for Compustat objects!'
+            print('Function only valid for Compustat objects!')
             return []
  
         return DataItem.COMPUSTAT
@@ -722,7 +721,7 @@ class DataAccess(object):
         else:
             retstr = "DataAccess internal error\n"
 
-        print retstr
+        print(retstr)
         return retstr
         #get_sublists
 
@@ -734,18 +733,17 @@ if __name__ == '__main__':
     
     # Check if GOOG is a valid symbol.
     val = c_dataobj.check_symbol('GOOG')
-    print "Is GOOG a valid symbol? :" , val
+    print("Is GOOG a valid symbol? :" , val)
     
     # Check if QWERTY is a valid symbol.
     val = c_dataobj.check_symbol('QWERTY')
-    print "Is QWERTY a valid symbol? :" , val
-
+    print("Is QWERTY a valid symbol? :" , val)
     # Check if EBAY is part of SP5002012 list.
     val = c_dataobj.check_symbol('EBAY', s_list='sp5002012')
-    print "Is EBAY a valid symbol in SP5002012 list? :", val
+    print("Is EBAY a valid symbol in SP5002012 list? :", val)
 
     # Check if GLD is part of SP5002012 after checking if GLD is a valid symbol.
     val = c_dataobj.check_symbol('GLD')
-    print "Is GLD a valid symbol? : ", val
+    print("Is GLD a valid symbol? : ", val)
     val = c_dataobj.check_symbol('GLD', 'sp5002012')
-    print "Is GLD a valid symbol in sp5002012 list? :", val
+    print("Is GLD a valid symbol in sp5002012 list? :", val)

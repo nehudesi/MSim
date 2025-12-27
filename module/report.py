@@ -61,8 +61,8 @@ def get_annual_return(fund_ts, years):
     """
     @summary prints annual return for given fund and years to the given stream
     @param fund_ts: pandas fund time series
-    @param years: list of years to print out
-    @param ostream: stream to print to
+    @param years: list of years to print(out))
+    @param ostream: stream to print(to))
     """
     lf_ret=[]
     for year in years:
@@ -80,8 +80,8 @@ def get_winning_days(fund_ts, years):
     """
     @summary prints winning days for given fund and years to the given stream
     @param fund_ts: pandas fund time series
-    @param years: list of years to print out
-    @param ostream: stream to print to
+    @param years: list of years to print(out))
+    @param ostream: stream to print(to))
     """
     s_ret=""
     for year in years:
@@ -97,8 +97,8 @@ def get_max_draw_down(fund_ts, years):
     """
     @summary prints max draw down for given fund and years to the given stream
     @param fund_ts: pandas fund time series
-    @param years: list of years to print out
-    @param ostream: stream to print to
+    @param years: list of years to print(out))
+    @param ostream: stream to print(to))
     """
     s_ret=""
     for year in years:
@@ -114,8 +114,8 @@ def get_daily_sharpe(fund_ts, years):
     """
     @summary prints sharpe ratio for given fund and years to the given stream
     @param fund_ts: pandas fund time series
-    @param years: list of years to print out
-    @param ostream: stream to print to
+    @param years: list of years to print(out))
+    @param ostream: stream to print(to))
     """
     s_ret=""
     for year in years:
@@ -131,8 +131,8 @@ def get_daily_sortino(fund_ts, years):
     """
     @summary prints sortino ratio for given fund and years to the given stream
     @param fund_ts: pandas fund time series
-    @param years: list of years to print out
-    @param ostream: stream to print to
+    @param years: list of years to print(out))
+    @param ostream: stream to print(to))
     """
     s_ret=""
     for year in years:
@@ -148,8 +148,8 @@ def get_std_dev(fund_ts):
     """
     @summary gets standard deviation of returns for a fund as a string
     @param fund_ts: pandas fund time series
-    @param years: list of years to print out
-    @param ostream: stream to print to
+    @param years: list of years to print(out))
+    @param ostream: stream to print(to))
     """
     fund_ts=fund_ts.fillna(method='pad')
     fund_ts=fund_ts.fillna(method='bfill')
@@ -191,8 +191,8 @@ def print_industry_coer(fund_ts, ostream):
     """
     @summary prints standard deviation of returns for a fund
     @param fund_ts: pandas fund time series
-    @param years: list of years to print out
-    @param ostream: stream to print to
+    @param years: list of years to print(out))
+    @param ostream: stream to print(to))
     """
     industries = [['$DJUSBM', 'Materials'],
     ['$DJUSNC', 'Goods'],
@@ -224,8 +224,8 @@ def print_other_coer(fund_ts, ostream):
     """
     @summary prints standard deviation of returns for a fund
     @param fund_ts: pandas fund time series
-    @param years: list of years to print out
-    @param ostream: stream to print to
+    @param years: list of years to print(out))
+    @param ostream: stream to print(to))
     """
     industries = [['$SPX', '    S&P Index'],
     ['$DJI', '    Dow Jones'],
@@ -252,8 +252,8 @@ def print_benchmark_coer(fund_ts, benchmark_close, sym,  ostream):
     """
     @summary prints standard deviation of returns for a fund
     @param fund_ts: pandas fund time series
-    @param years: list of years to print out
-    @param ostream: stream to print to
+    @param years: list of years to print(out))
+    @param ostream: stream to print(to))
     """
     fund_ts=fund_ts.fillna(method='pad')
     fund_ts=fund_ts.fillna(method='bfill')
@@ -270,8 +270,8 @@ def print_monthly_returns(fund_ts, years, ostream):
     """
     @summary prints monthly returns for given fund and years to the given stream
     @param fund_ts: pandas fund time series
-    @param years: list of years to print out
-    @param ostream: stream to print to
+    @param years: list of years to print(out))
+    @param ostream: stream to print(to))
     """
     ostream.write("    ")
     month_names = du.getMonthNames()
@@ -296,8 +296,8 @@ def print_monthly_turnover(fund_ts, years, ts_turnover, ostream):
     """
     @summary prints monthly returns for given fund and years to the given stream
     @param fund_ts: pandas fund time series
-    @param years: list of years to print out
-    @param ostream: stream to print to
+    @param years: list of years to print(out))
+    @param ostream: stream to print(to))
     """
     ostream.write("    ")
     month_names = du.getMonthNames()
@@ -321,8 +321,8 @@ def print_monthly_ks(fund_ts, years, ostream):
     """
     @summary prints monthly returns for given fund and years to the given stream
     @param fund_ts: pandas fund time series
-    @param years: list of years to print out
-    @param ostream: stream to print to
+    @param years: list of years to print(out))
+    @param ostream: stream to print(to))
     """
     ostream.write("    ")
     month_names = du.getMonthNames()
@@ -392,9 +392,9 @@ def print_stats(fund_ts, benchmark, name, lf_dividend_rets=0.0, original="",s_fu
     @param name: name to associate with the fund in the report
     @param directory: parameter to specify printing to a directory
     @param leverage: time series to plot with report
-    @param commissions: value to print with report
-    @param slippage: value to print with report
-    @param ostream: stream to print stats to, defaults to stdout
+    @param commissions: value to print(with report))
+    @param slippage: value to print(with report))
+    @param ostream: stream to print(stats to, defaults to stdout))
     """
 
     #Set locale for currency conversions
@@ -423,7 +423,7 @@ def print_stats(fund_ts, benchmark, name, lf_dividend_rets=0.0, original="",s_fu
         splot_dir =  path.join(directory, splot)
         ostream = open(sfile, "wb")
         ostream.write("<pre>")
-        print "writing to ", sfile
+        print("writing to ", sfile
 
         if type(original)==type("str"):
             if type(leverage)!=type(False):
@@ -675,11 +675,11 @@ def print_html(fund_ts, benchmark, name, lf_dividend_rets=0.0, original="",
     @param name: name to associate with the fund in the report
     @param directory: parameter to specify printing to a directory
     @param leverage: time series to plot with report
-    @param commissions: value to print with report
-    @param slippage: value to print with report
-    @param ostream: stream to print stats to, defaults to stdout
+    @param commissions: value to print(with report))
+    @param slippage: value to print(with report))
+    @param ostream: stream to print(stats to, defaults to stdout))
     """
-    print fund_ts
+    print(fund_ts))
     #Set locale for currency conversions
     locale.setlocale(locale.LC_ALL, '')
 
@@ -696,7 +696,7 @@ def print_html(fund_ts, benchmark, name, lf_dividend_rets=0.0, original="",
         splot = "plot-%s.png" % name
         splot_dir =  path.join(directory, splot)
         ostream = open(sfile, "wb")
-        print "writing to ", sfile
+        print("writing to ", sfile
 
         if type(original)==type("str"):
             if type(leverage)!=type(False):
@@ -832,8 +832,8 @@ def print_html(fund_ts, benchmark, name, lf_dividend_rets=0.0, original="",
         lf_vals.append(get_annual_return(benchmark_close[bench_sym], years))
         ls_labels.append(bench_sym)
 
-    print lf_vals
-    print ls_labels
+    print(lf_vals))
+    print(ls_labels))
     ls_year_labels=[]
     for i in range(0,len(years)):
         ls_year_labels.append(str(years[i]))
@@ -905,7 +905,7 @@ def print_html(fund_ts, benchmark, name, lf_dividend_rets=0.0, original="",
 def print_bar_chart(llf_vals, ls_fund_labels, ls_year_labels, s_filename):
     llf_vals=((1,2,3),(3,2,1),(2,2,2))
     amin=min(min(llf_vals))
-    print amin
+    print(amin))
     min_lim=0
     if amin<0:
         min_lim = amin
@@ -1126,7 +1126,7 @@ def generate_robust_report(fund_matrix, out_file):
     """
     @summary generates a report using robust backtesting
     @param fund_matrix: a pandas matrix of fund time series
-    @param out_file: filename where to print report
+    @param out_file: filename where to print(report))
     """
     html_file  =  open(out_file,"w")
     print_header(html_file, out_file)

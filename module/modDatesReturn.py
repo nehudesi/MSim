@@ -6,11 +6,11 @@ Author: Chintan Patel
 Email: chintanlike@gmail.com
 '''
 
-import basic
+from module import basic
 import datetime
 
 def get_dates():
-        print '------------------------------------------------------------- '
+        print('------------------------------------------------------------- ')
         try:
                 start_month = int(input('<<< Enter Start Month: '))
             
@@ -29,23 +29,23 @@ def get_dates():
                         basic.print_clrscr()
                         basic.go_back()
     
-                end_month = input('<<< Enter End Month: ')
+                end_month = int(input('<<< Enter End Month: '))
                 if int(end_month) > 12 or int(end_month) <= 0:
                         basic.print_clrscr()
                         basic.go_back()
                         
-                end_day = input('<<< Enter End Day: ')
+                end_day = int(input('<<< Enter End Day: '))
                 if int(end_day) > 31 or int(end_day ) <= 0:
                         basic.print_clrscr()
                         basic.go_back()
                         
-                end_year = input('<<< Enter End Year: ')
+                end_year = int(input('<<< Enter End Year: '))
                 if int(end_year) > now.year or int(end_year) < 2010:
                         basic.print_clrscr()
                         basic.go_back()
                         
                 if start_year > end_year:
-                    print '<<<(w)End Year should be greater than start year'
+                    print('<<<(w)End Year should be greater than start year')
                     basic.print_clrscr()
                     basic.go_back()
             
@@ -65,7 +65,7 @@ def get_dates():
         
         if leap_year_start != 0 or leap_year_end != 0:
             if start_day == 29 or end_day == 29:
-                print '<<(w) Not leap year..\n' 
+                print('<<(w) Not leap year..\n') 
                 basic.print_clrscr()
                 basic.go_back()
                         

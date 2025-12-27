@@ -19,9 +19,9 @@ import datetime as dt
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import basic
-import modDatesReturn
-from time import sleep
+from module import basic
+from module import modDatesReturn
+import time
 
 def portfolioAnalyz():
     ''' Main Function
@@ -29,19 +29,19 @@ def portfolioAnalyz():
         Create Excel sheet with your portfolio allocation and it will be read by this method to perform analysis
     '''
     # Reading the portfolio
-    print '<<<(s) Update your portfolioanalyze.csv file..'
-    if os.path.isfile("C:\MRT3.0\portfolioanalyze.csv"):
+    print('<<<(s) Update your portfolioanalyze.csv file..')
+    if os.path.isfile("portfolioanalyze.csv"):
         na_portfolio = np.loadtxt('portfolioanalyze.csv', dtype='S5,f4',
                         delimiter=',', comments="#", skiprows=1)
     else:
-        print '<<<(w) File Not Found: portfolioanalyze.csv '
-        sleep(2)
+        print('<<<(w) File Not Found: portfolioanalyze.csv')
+        time.sleep(2)
         basic.go_back()
 
         
     # Sorting the portfolio by symbol name
     na_portfolio = sorted(na_portfolio, key=lambda x: x[0])
-    print na_portfolio
+    print(na_portfolio)
 
     # Create two list for symbol names and allocation
     ls_port_syms = []
@@ -57,7 +57,7 @@ def portfolioAnalyz():
     ls_bad_syms = list(set(ls_port_syms) - set(ls_all_syms))
 
     if len(ls_bad_syms) != 0:
-        print "<<<(w) Portfolio contains bad symbols : ", ls_bad_syms
+        print("<<<(w) Portfolio contains bad symbols : ", ls_bad_syms)
 
     for s_sym in ls_bad_syms:
         i_index = ls_port_syms.index(s_sym)
@@ -65,7 +65,7 @@ def portfolioAnalyz():
         lf_port_alloc.pop(i_index)
 
     # Reading the historical data.
-    print '<<<(i) Reading Historical data...'
+    print('<<<(i) Reading Historical data...')
     
 
     #dt_end = dt.datetime(2011, 1, 1)

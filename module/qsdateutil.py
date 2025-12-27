@@ -22,7 +22,7 @@ def _cache_dates():
         # filename = os.environ['QS'] + "/qstkutil/NYSE_dates.txt"
         filename = os.path.join(os.path.dirname(__file__), 'NYSE_dates.txt')        
     except KeyError:
-        print "<<<(w) Please be sure you have NYSE_dates.txt ..Conact @Author"
+        print("<<<(w) Please be sure you have NYSE_dates.txt ..Conact @Author")
 
     datestxt = np.loadtxt(filename, dtype=str)
     dates = []
@@ -169,9 +169,9 @@ def getNextNNYSEdays(startday, days, timeofday):
         
         
     except KeyError:
-        print '<<<(w) Missing NYSE_dates.txt file..'
-#         print "Please be sure to set the value for QS in config.sh or\n"
-#         print "in local.sh and then \'source local.sh\'.\n"
+        print('<<<(w) Missing NYSE_dates.txt file..')
+#         print("Please be sure to set the value for QS in config.sh or\n"
+#         print("in local.sh and then \'source local.sh\'.\n"
             
     
     datestxt = np.loadtxt(filename,dtype=str)
@@ -197,9 +197,9 @@ def getPrevNNYSEday(startday, timeofday):
         # filename = os.environ['QS'] + "/qstkutil/NYSE_dates.txt"
         filename = os.path.join(os.path.dirname(__file__), 'NYSE_dates.txt')
     except KeyError:
-        print '<<<(w) Missing NYSE_date.txt..\n'
-#         print "Please be sure to set the value for QS in config.sh or\n"
-#         print "in local.sh and then \'source local.sh\'.\n"
+        print('<<<(w) Missing NYSE_date.txt..\n')
+#         print("Please be sure to set the value for QS in config.sh or\n"
+#         print("in local.sh and then \'source local.sh\'.\n"
 
     datestxt = np.loadtxt(filename,dtype=str)
 

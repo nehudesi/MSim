@@ -18,9 +18,9 @@ import datetime as dt
 import module.DataAccess as da
 #import module.tsutil as tsu
 #import module.EventProfiler as ep
-import modDatesReturn
+from module import modDatesReturn
 import csv
-import basic
+from module import basic
 
 
 def find_events(ls_symbols, d_data):
@@ -28,7 +28,7 @@ def find_events(ls_symbols, d_data):
     df_close = d_data['actual_close']
     # ts_market = df_close['SPY']
 
-    print "Finding Events"
+    print("Finding Events")
 
     # Creating an empty dataframe
     df_events = copy.deepcopy(df_close)
@@ -47,11 +47,11 @@ def find_events(ls_symbols, d_data):
     f_symreturn_cutoff = input('<<< Enter the cutoff in decimel for symbol return today: ')
     f_symyest_cutoff = input('<<< Enter the cutoff in decimel for symbol return yesterday: ')
    
-    print '1 -> SYMBOL_RETURN_TODAY > ', f_symreturn_cutoff, 'SYMBOL_RETURN_YESTERDAY < ',f_symyest_cutoff 
-    print '2 -> SYMBOL_RETURN_TODAY < ', f_symreturn_cutoff, 'SYMBOL_RETURN_YESTERDAY > ',f_symyest_cutoff 
-    print '3 -> SYMBOL_RETURN_TODAY > ', f_symreturn_cutoff, 'SYMBOL_RETURN_YESTERDAY > ',f_symyest_cutoff 
-    print '4 -> SYMBOL_RETURN_TODAY <', f_symreturn_cutoff,  'SYMBOL_RETURN_YESTERDAY < ',f_symyest_cutoff
-    
+    print('1 -> SYMBOL_RETURN_TODAY > ', f_symreturn_cutoff, 'SYMBOL_RETURN_YESTERDAY < ',f_symyest_cutoff)
+    print('2 -> SYMBOL_RETURN_TODAY < ', f_symreturn_cutoff, 'SYMBOL_RETURN_YESTERDAY > ',f_symyest_cutoff)
+    print('3 -> SYMBOL_RETURN_TODAY > ', f_symreturn_cutoff, 'SYMBOL_RETURN_YESTERDAY > ',f_symyest_cutoff)
+    print('4 -> SYMBOL_RETURN_TODAY <', f_symreturn_cutoff,  'SYMBOL_RETURN_YESTERDAY < ',f_symyest_cutoff)
+
     try:
         select = input('Select: ')
     except ValueError:
@@ -173,7 +173,7 @@ def eventBollingerMain():
 
     find_events(ls_symbols, d_data)
 
-    # print "Creating Study"
+    # print("Creating Study"
     # ep.eventprofiler(df_events, d_data, i_lookback=20, i_lookforward=20,
     #             s_filename='MyEventStudy.pdf', b_market_neutral=True, b_errorbars=True,
     #             s_market_sym='SPY')

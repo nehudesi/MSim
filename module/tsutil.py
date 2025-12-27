@@ -4,10 +4,7 @@ Type: Library
 Location: C:\MRT3.0\module
 Author: Chintan Patel
 Email: chintanlike@gmail.com
-
 '''
-
-
 import math
 import datetime as dt
 #import numpy as np
@@ -255,7 +252,7 @@ def get_sharpe_ratio( rets, risk_free=0.00 ):
 #     
 #     f_ror_ytd = f_inv - 1.0    
 #     
-#     #print ' RorYTD =', f_inv, 'Over days:', len(rets)
+#     #print(' RorYTD =', f_inv, 'Over days:', len(rets)
 #     
 #     return ( (1.0 + f_ror_ytd)**( 1.0/(len(rets)/252.0) ) ) - 1.0
 
@@ -319,8 +316,8 @@ def getOptPort(rets, f_target, l_period=1, naLower=None, naUpper=None, lNagDebug
         pass
         import nagint as nag
     except ImportError:
-        print 'Could not import NAG library'
-        print 'make sure nagint.so is in your python path'
+        print('Could not import NAG library')
+        print('make sure nagint.so is in your python path')
         return ([], 0, 0)
     
     # Get number of stocks """
@@ -362,7 +359,7 @@ def getOptPort(rets, f_target, l_period=1, naLower=None, naUpper=None, lNagDebug
         naReturn = nag.optPort( naConstraints, naLower, naUpper, \
                                       naCov, naInitial, lNagDebug )
     except RuntimeError:
-        print 'NAG Runtime error with target: %.02lf'%(f_target)
+        print('NAG Runtime error with tadrget: %.02lf'%(f_target))
         return ( naInitial, sqrt( naCov[0][0] ) )  
     #return semi-junk to not mess up the rest of the plot
 
@@ -372,7 +369,7 @@ def getOptPort(rets, f_target, l_period=1, naLower=None, naUpper=None, lNagDebug
     
     # Show difference between above stdev and sqrt NAG covariance"""
     # possibly not taking correlation into account """
-    #print fPortDev / sqrt(naReturn[0, -1]) 
+    #print(fPortDev / sqrt(naReturn[0, -1]) ))
 
     # Return weights and stdDev of portfolio."""
     #  note again the last value of naReturn is NAG's reported variance """
@@ -397,7 +394,7 @@ def OptPort( naData, fTarget, naLower=None, naUpper=None, naExpected=None, s_typ
         from cvxopt.solvers import qp, options
 
     except ImportError:
-        print 'Could not import CVX library'
+        print('Could not import CVX library')
         raise
     
     ''' Get number of stocks '''
@@ -474,9 +471,9 @@ def OptPort( naData, fTarget, naLower=None, naUpper=None, naExpected=None, s_typ
 
     # Note, returns are modified to all be long from here on out
     (fMin, fMax) = getRetRange(False, naLower, naUpper, naExpected, "long") 
-    #print (fTarget, fMin, fMax)
+    #print(fTarget, fMin, fMax)
     if fTarget<fMin or fTarget>fMax:
-        print "<<<(i) Target not achievable..", fTarget, fMin, fMax
+        print("<<<(i) Target not achievable..", fTarget, fMin, fMax)
         b_error = True
 
     naLower = naLower*(-1)
@@ -514,7 +511,7 @@ def OptPort( naData, fTarget, naLower=None, naUpper=None, naExpected=None, s_typ
         b_error = True
 
     if b_error == True:
-        print "<<<(i) Optimization not Possible"
+        print("<<<(i) Optimization not Possible")
         na_port = naLower*-1
         if sum(na_port) < 1:
             if sum(naUpper) == 1:
@@ -760,7 +757,7 @@ def getFrontier( rets, lRes=100, fUpper=0.2, fLower=0.00):
 # 
 #     for sStock in dmPrice.columns:
 #         fValid = 0.0
-#         print sStock
+#         print(sStock))
 #         # loop through all dates """
 #         for dtDate in dmPrice.index:
 #             # Count null (nan/inf/etc) values """
@@ -833,7 +830,7 @@ def getFrontier( rets, lRes=100, fUpper=0.2, fLower=0.00):
 #         for i in range( lNum - len(lsRetStocks) ):
 #             lRemaining = len(llRemainingIndexes)
 #             if( lRemaining == 0 ):
-#                 print 'Error in getRandPort: ran out of stocks'
+#                 print('Error in getRandPort: ran out of stocks'
 #                 return lsRetStocks
 #             
 #             # Pick a stock and remove it from the list of remaining stocks """
